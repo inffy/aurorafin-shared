@@ -1,0 +1,29 @@
+name: Validate Shell
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Install Just, shfmt and shellcheck
+        run: |
+          /home/linuxbrew/.linuxbrew/bin/brew install just shfmt shellcheck
+          echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
+
+      - name: Check Just Syntax
+        shell: bash
+        run: |
+          just --version
+
+          just format
+          just lint
