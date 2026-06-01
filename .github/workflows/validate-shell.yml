@@ -17,7 +17,7 @@ jobs:
 
       - name: Install Just, shfmt and shellcheck
         run: |
-          /home/linuxbrew/.linuxbrew/bin/brew install just shfmt shellcheck
+          /home/linuxbrew/.linuxbrew/bin/brew install just shfmt
           echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
 
       - name: Check Just Syntax
