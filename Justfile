@@ -21,7 +21,7 @@ fix:
     {{ just }} --fmt -f Justfile || { exit 1; }
 
 # Runs shell check on all Bash scripts
-lint:
+shell-lint dir="system_files":
     #!/usr/bin/env bash
     set -eoux pipefail
     # Check if shellcheck is installed
@@ -30,10 +30,10 @@ lint:
         exit 1
     fi
     # Run shellcheck on all Bash scripts
-    /usr/bin/find . -iname "*.sh" -type f -exec shellcheck "{}" ';'
+    /usr/bin/find {{ dir }} -type d -name ".*" -prune -o -type f \( -name "*.sh" -o -exec sh -c 'head -n 1 "$1" | grep -qE "^#!(.*/bin/(bash|sh|zsh)|/usr/bin/env (bash|sh|zsh))"' _ {} \; \) -exec shellcheck {} +
 
 # Runs shfmt on all Bash scripts
-format:
+shell-format:
     #!/usr/bin/env bash
     set -eoux pipefail
     # Check if shfmt is installed
