@@ -2,6 +2,8 @@ name: Validate Shell
 
 on:
   pull_request:
+    paths:
+      - "system_files"
   push:
     branches:
       - main
