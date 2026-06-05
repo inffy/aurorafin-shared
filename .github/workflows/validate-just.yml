@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "Justfile"
+      - "system_files/shared/usr/share/ublue-os/just"
   push:
     branches:
       - main
